@@ -29,7 +29,7 @@ func (s *Server) generateServerResources(dir string) ([]*goResource, error) {
 		r := resources[endpoint]
 		rd := resource.New(s.apiDef, &r, endpoint, true)
 		pkgName := strings.ToLower(commons.NormalizeIdentifier(rd.Name))
-		gr := newGoResource(&rd, pkgName)
+		gr := newGoResource(&rd, pkgName, s.PackageName)
 		err = gr.generate(&r, endpoint, dir, s.libsRootURLs)
 		if err != nil {
 			return nil, err

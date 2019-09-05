@@ -20,19 +20,21 @@ const (
 
 type goResource struct {
 	*resource.Resource
-	Methods     []serverMethod
-	PackageName string
+	Methods         []serverMethod
+	PackageName     string
+	MainPackageName string
 }
 
-func newGoResource(rd *resource.Resource, packageName string) *goResource {
+func newGoResource(rd *resource.Resource, packageName string, mainPackageName string) *goResource {
 	var methods []serverMethod
 	for _, rm := range rd.Methods {
 		methods = append(methods, newServerMethod(rm, rd.APIDef, rd))
 	}
 	return &goResource{
-		Resource:    rd,
-		Methods:     methods,
-		PackageName: packageName,
+		Resource:        rd,
+		Methods:         methods,
+		PackageName:     packageName,
+		MainPackageName: mainPackageName,
 	}
 }
 
